@@ -23,7 +23,7 @@ public class GameWindow {
 
         jFrame.setTitle("PlayerOne Score <INSERT-NUM>, PlayerTwo Score<INSERT-NUM>");
         jFrame.setSize(screenHeight, screenWidth);
-        
+        jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.add(gamePanel);
         jFrame.setResizable(false);

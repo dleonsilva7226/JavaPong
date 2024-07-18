@@ -14,11 +14,11 @@ public class GamePanel extends JPanel {
     private static Color paddleColor = Color.WHITE;
 
     //Initial Location of Player One
-    private static int pOneXDelta = 10;
+    private static int pOneXDelta = 20;
     private static int pOneYDelta = 300 - paddleHeight;
 
     //Initial Location of Player Two
-    private static int pTwoXDelta = 890 - paddleWidth;
+    private static int pTwoXDelta = 880 - paddleWidth;
     private static int pTwoYDelta = 300 - paddleHeight;
 
     //Panel Color
@@ -34,11 +34,30 @@ public class GamePanel extends JPanel {
     }
 
     public void changeYDelta (int value, int playerNum) {
-        if (playerNum == 1) {
-            pOneYDelta += value;
-        } else {
-            pTwoYDelta += value;
+        //ISSUE: FIGURE OUT WHY PADDLES CAN COLLIDE WITH TOP BUT DOESN'T 
+        //STOP WHEN GOING DOWN
+        int pOneUpMovementTotal = pOneYDelta + value;
+        int pOneDownMovementTotal = pOneYDelta + GamePanel.paddleHeight + value;
+        int pTwoUpMovementTotal = pTwoYDelta + value;
+        int pTwoDownMovementTotal = pTwoYDelta + GamePanel.paddleHeight + value;
+        boolean pOneCanMove = (pOneUpMovementTotal >= 0);
+        boolean pTwoCanMove = (pTwoUpMovementTotal >= 0);
+        if (value >= 0) {
+            pOneCanMove = (pOneDownMovementTotal < GameWindow.screenHeight - 29);
+            pTwoCanMove = (pTwoDownMovementTotal < GameWindow.screenHeight - 29);
         }
+        
+        
+        if (playerNum == 1) {
+            if (pOneCanMove) {
+                pOneYDelta += value;
+            }
+        } else {
+            if (pTwoCanMove) {
+                pTwoYDelta += value;
+            }
+        }
+        // revalidate();
         repaint();
     }
 
@@ -48,6 +67,7 @@ public class GamePanel extends JPanel {
         // g.fillRect(100, 200, paddleWidth, paddleHeight);
         //Move Player One's Paddle
         g.fillRect(pOneXDelta, pOneYDelta, paddleWidth, paddleHeight);
+        //Move Player Two's Paddle
         g.fillRect(pTwoXDelta, pTwoYDelta, paddleWidth, paddleHeight);
         
     }

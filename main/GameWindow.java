@@ -7,8 +7,8 @@ public class GameWindow {
     private JFrame jFrame;
 
     //SCREEN HEIGHT DEFINED HERE
-    protected final static int screenHeight = 900;
-    protected final static int screenWidth = 600;
+    protected final static int screenWidth = 900;
+    protected final static int screenHeight = 600;
 
     //PLAYER ONE KEYBOARD INPUT
     protected final static int playerOnePaddleUp = KeyEvent.VK_W;
@@ -22,7 +22,7 @@ public class GameWindow {
         jFrame = new JFrame();
 
         jFrame.setTitle("PlayerOne Score <INSERT-NUM>, PlayerTwo Score<INSERT-NUM>");
-        jFrame.setSize(screenHeight, screenWidth);
+        jFrame.setSize(screenWidth, screenHeight);
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.add(gamePanel);

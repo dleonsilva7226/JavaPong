@@ -14,15 +14,23 @@ public class GamePanel extends JPanel {
     private static Color paddleColor = Color.WHITE;
 
     //Initial Location of Player One
-    private static int pOneXDelta = 20;
-    private static int pOneYDelta = 300 - paddleHeight;
+    private static float pOneXDelta = 20;
+    private static float pOneYDelta = 300 - paddleHeight;
 
     //Initial Location of Player Two
-    private static int pTwoXDelta = 880 - paddleWidth;
-    private static int pTwoYDelta = 300 - paddleHeight;
+    private static float pTwoXDelta = 880 - paddleWidth;
+    private static float pTwoYDelta = 300 - paddleHeight;
 
     //Panel Color
     private static Color gamePanelColor = Color.BLACK;
+
+    //FPS Counter
+    private static int frames = 0;
+    private static long lastCheck = 0;
+
+
+    //Y Direction
+    private float yDir = 1f;
 
     // //Booleans to see which Specific Paddle to Move
     // private static boolean movePlayerOne = true;
@@ -34,12 +42,10 @@ public class GamePanel extends JPanel {
     }
 
     public void changeYDelta (int value, int playerNum) {
-        //ISSUE: FIGURE OUT WHY PADDLES CAN COLLIDE WITH TOP BUT DOESN'T 
-        //STOP WHEN GOING DOWN
-        int pOneUpMovementTotal = pOneYDelta + value;
-        int pOneDownMovementTotal = pOneYDelta + GamePanel.paddleHeight + value;
-        int pTwoUpMovementTotal = pTwoYDelta + value;
-        int pTwoDownMovementTotal = pTwoYDelta + GamePanel.paddleHeight + value;
+        float pOneUpMovementTotal = pOneYDelta + value;
+        float pOneDownMovementTotal = pOneYDelta + GamePanel.paddleHeight + value;
+        float pTwoUpMovementTotal = pTwoYDelta + value;
+        float pTwoDownMovementTotal = pTwoYDelta + GamePanel.paddleHeight + value;
         boolean pOneCanMove = (pOneUpMovementTotal >= 0);
         boolean pTwoCanMove = (pTwoUpMovementTotal >= 0);
         if (value >= 0) {
@@ -57,19 +63,23 @@ public class GamePanel extends JPanel {
                 pTwoYDelta += value;
             }
         }
-        // revalidate();
-        repaint();
+    }
+
+    public void setYPos (float newYDelta, int playerNum) {
+        if (playerNum == 1) {
+            GamePanel.pOneYDelta = newYDelta;
+        } else {
+            GamePanel.pTwoYDelta = newYDelta;
+        }
     }
 
     public void paintComponent (Graphics g) {
         super.paintComponent(g);
         g.setColor(paddleColor);
-        // g.fillRect(100, 200, paddleWidth, paddleHeight);
         //Move Player One's Paddle
-        g.fillRect(pOneXDelta, pOneYDelta, paddleWidth, paddleHeight);
+        g.fillRect((int)pOneXDelta, (int)pOneYDelta, paddleWidth, paddleHeight);
         //Move Player Two's Paddle
-        g.fillRect(pTwoXDelta, pTwoYDelta, paddleWidth, paddleHeight);
-        
+        g.fillRect((int)pTwoXDelta, (int)pTwoYDelta, paddleWidth, paddleHeight);
     }
     
 }

@@ -37,16 +37,16 @@ public class KeyboardInputs implements KeyListener{
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case playerOnePaddleUp:
-                gamePanel.changeYDelta(-15, 1);
+                gamePanel.changeYDelta(-10, 1);
                 break;
             case playerOnePaddleDown:
-                gamePanel.changeYDelta(15, 1);
+                gamePanel.changeYDelta(10, 1);
                 break;
             case playerTwoPaddleUp:
-                gamePanel.changeYDelta(-15, 2);
+                gamePanel.changeYDelta(-10, 2);
                 break;
             case playerTwoPaddleDown:
-                gamePanel.changeYDelta(15, 2);
+                gamePanel.changeYDelta(10, 2);
                 break;
         }
         System.out.println("Key Pressed: " + KeyEvent.getKeyText(e.getKeyCode()));

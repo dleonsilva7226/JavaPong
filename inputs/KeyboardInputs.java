@@ -2,6 +2,7 @@ package inputs;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
+import entities.*;
 
 import main.Game;
 import main.GamePanel;
@@ -24,8 +25,14 @@ public class KeyboardInputs implements KeyListener{
     protected final static int playerOneID = 1;
     protected final static int playerTwoID = 2;
 
+    //PADDLE REFERENCES FROM GAME PANEL
+    public Paddle paddleOneRef;
+    public Paddle paddleTwoRef;
+
     public KeyboardInputs (GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+        this.paddleOneRef = gamePanel.paddleOne;
+        this.paddleTwoRef = gamePanel.paddleTwo;
     }
 
     @Override
@@ -35,23 +42,23 @@ public class KeyboardInputs implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //ATTEMPTING TO GET SMOOTHER MOVEMENT
+        //ATTEMPTING TO GET SMOOTHER MOVEMENT OF THE PADDLES
         switch (e.getKeyCode()) {
             case playerOnePaddleUp:
-                // gamePanel.changeYDelta(-10, 1);
-                gamePanel.setVelY(5);
+                this.paddleOneRef.setYDelta(paddleOneRef.getYDelta() - 10);
+                // gamePanel.setVelY(5);
                 break;
             case playerOnePaddleDown:
-                // gamePanel.changeYDelta(10, 1);
-                gamePanel.setVelY(5);
+                this.paddleOneRef.setYDelta(paddleOneRef.getYDelta() + 10);
+                // gamePanel.setVelY(5);
                 break;
             case playerTwoPaddleUp:
-                // gamePanel.changeYDelta(-10, 2);
-                gamePanel.setVelY(5);
+                this.paddleTwoRef.setYDelta(paddleTwoRef.getYDelta() - 10);
+                // gamePanel.setVelY(5);
                 break;
             case playerTwoPaddleDown:
-                // gamePanel.changeYDelta(10, 2);
-                gamePanel.setVelY(5);
+                this.paddleTwoRef.setYDelta(paddleTwoRef.getYDelta() + 10);
+                // gamePanel.setVelY(5);
                 break;
         }
         System.out.println("Key Pressed: " + KeyEvent.getKeyText(e.getKeyCode()));

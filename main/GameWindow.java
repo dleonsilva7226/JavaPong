@@ -7,8 +7,8 @@ public class GameWindow {
     private JFrame jFrame;
 
     //SCREEN HEIGHT DEFINED HERE
-    protected final static int screenWidth = 900;
-    protected final static int screenHeight = 600;
+    public final static int screenWidth = 900;
+    public final static int screenHeight = 600;
 
     //PLAYER ONE KEYBOARD INPUT
     protected final static int playerOnePaddleUp = KeyEvent.VK_W;
@@ -29,4 +29,12 @@ public class GameWindow {
         jFrame.setResizable(false);
         jFrame.setVisible(true);
     }
+
+    // public int getWindowWidth() {
+    //     return GameWindow.screenWidth;
+    // }
+
+    // public int getWindowHeight() {
+    //     return GameWindow.screenHeight;
+    // }
 }

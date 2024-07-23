@@ -2,6 +2,7 @@ package entities;
 
 import java.awt.Color;
 import utilz.*;
+import main.*;
 
 public class Paddle {
     //Location of Paddle
@@ -19,8 +20,15 @@ public class Paddle {
         }
     }
 
+    //Incorporate Collision Detection so that Paddle Does not Go Too Up or Too Down
     public void setYDelta(float yDelta) {
-        this.paddleYDelta = yDelta;
+        if (yDelta >= 0 && yDelta + Constants.paddleHeight + 20 < GameWindow.screenHeight) {
+            this.paddleYDelta = yDelta;
+        } else if (yDelta < 0){
+            this.paddleYDelta = 5;
+        }
+        //DRAW LINE TO TEST THE BOTTOM EDGE OF THE GAME
+        //ACCOUNT FOR BOTTOM COLLISION IF IT BECOMES A PROBLEM
     }
 
     public float getXDelta() {

@@ -35,18 +35,23 @@ public class KeyboardInputs implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
+        //ATTEMPTING TO GET SMOOTHER MOVEMENT
         switch (e.getKeyCode()) {
             case playerOnePaddleUp:
-                gamePanel.changeYDelta(-10, 1);
+                // gamePanel.changeYDelta(-10, 1);
+                gamePanel.setVelY(5);
                 break;
             case playerOnePaddleDown:
-                gamePanel.changeYDelta(10, 1);
+                // gamePanel.changeYDelta(10, 1);
+                gamePanel.setVelY(5);
                 break;
             case playerTwoPaddleUp:
-                gamePanel.changeYDelta(-10, 2);
+                // gamePanel.changeYDelta(-10, 2);
+                gamePanel.setVelY(5);
                 break;
             case playerTwoPaddleDown:
-                gamePanel.changeYDelta(10, 2);
+                // gamePanel.changeYDelta(10, 2);
+                gamePanel.setVelY(5);
                 break;
         }
         System.out.println("Key Pressed: " + KeyEvent.getKeyText(e.getKeyCode()));

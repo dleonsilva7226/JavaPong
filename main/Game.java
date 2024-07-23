@@ -7,6 +7,7 @@ public class Game implements Runnable {
 
     private final int FPS_SET = 120;
 
+
     public Game () {
         this.gamePanel = new GamePanel();
         this.gameWindow = new GameWindow(gamePanel);

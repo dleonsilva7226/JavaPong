@@ -28,13 +28,16 @@ public class GamePanel extends JPanel {
     private static int frames = 0;
     private static long lastCheck = 0;
 
-
     //Y Direction
     private float yDir = 1f;
 
     // //Booleans to see which Specific Paddle to Move
     // private static boolean movePlayerOne = true;
     // private static boolean movePlayerTwo = true;
+
+    //Velocity for Y Variable- FOR SMOOTHER MOVEMENT OF PADDLES AND BALL
+    public static float velY = 0;
+
 
     public GamePanel () {
         addKeyListener(new KeyboardInputs(this));
@@ -73,6 +76,10 @@ public class GamePanel extends JPanel {
         }
     }
 
+    public void setVelY (float velY) {
+        GamePanel.velY = velY;
+    }
+
     public void paintComponent (Graphics g) {
         super.paintComponent(g);
         g.setColor(paddleColor);
@@ -80,6 +87,7 @@ public class GamePanel extends JPanel {
         g.fillRect((int)pOneXDelta, (int)pOneYDelta, paddleWidth, paddleHeight);
         //Move Player Two's Paddle
         g.fillRect((int)pTwoXDelta, (int)pTwoYDelta, paddleWidth, paddleHeight);
+        // g.drawShape
     }
     
 }

@@ -3,6 +3,8 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import entities.Paddle;
 
 import javax.swing.JPanel;
@@ -16,64 +18,17 @@ public class GamePanel extends JPanel {
 
     //Panel Color
     private static Color gamePanelColor = Color.BLACK;
-
-    //FPS Counter
-    private static int frames = 0;
-    private static long lastCheck = 0;
-
-    //Y Direction
-    private float yDir = 1f;
-
-    //Velocity for Y Variable- FOR SMOOTHER MOVEMENT OF PADDLES AND BALL
-    public static float velY = 0;
-
-
+    
     public GamePanel () {
         addKeyListener(new KeyboardInputs(this));
         setBackground(gamePanelColor);
+        setPanelSize();
     }
 
-    // GET RID OF THE STUFF BELOW
-    // public void changeYDelta (int value, int playerNum) {
-    //     float pOneUpMovementTotal = pOneYDelta + value;
-    //     float pOneDownMovementTotal = pOneYDelta + GamePanel.paddleHeight + value;
-    //     float pTwoUpMovementTotal = pTwoYDelta + value;
-    //     float pTwoDownMovementTotal = pTwoYDelta + GamePanel.paddleHeight + value;
-    //     boolean pOneCanMove = (pOneUpMovementTotal >= 0);
-    //     boolean pTwoCanMove = (pTwoUpMovementTotal >= 0);
-    //     if (value >= 0) {
-    //         pOneCanMove = (pOneDownMovementTotal < GameWindow.screenHeight - 29);
-    //         pTwoCanMove = (pTwoDownMovementTotal < GameWindow.screenHeight - 29);
-    //     }
-        
-        
-    //     if (playerNum == 1) {
-    //         if (pOneCanMove) {
-    //             pOneYDelta += value;
-    //         }
-    //     } else {
-    //         if (pTwoCanMove) {
-    //             pTwoYDelta += value;
-    //         }
-    //     }
-    // }
-
-    // public void setYPos (float newYDelta, int playerNum) {
-    //     if (playerNum == 1) {
-    //         GamePanel.pOneYDelta = newYDelta;
-    //     } else {
-    //         GamePanel.pTwoYDelta = newYDelta;
-    //     }
-    // }
-
-    // GET RID OF THE STUFF ON TOP
-
-
-    //USE THIS FOR SMOOTHER PADDLE MOVING
-    // public void setVelY (float velY) {
-    //     GamePanel.velY = velY;
-    // }
-
+    private void setPanelSize () {
+        Dimension size = new Dimension(GameWindow.screenWidth, GameWindow.screenHeight);
+        setPreferredSize(size);
+    }
     
 
     public void paintComponent (Graphics g) {
@@ -85,14 +40,8 @@ public class GamePanel extends JPanel {
         g.fillRect((int)paddleTwo.getXDelta(), (int)paddleTwo.getYDelta(), Constants.paddleWidth, Constants.paddleHeight);
     }
 
-    public Paddle getPaddleOne () {
-        return this.paddleOne;
+    public void updatePaddleYPos() {
+        paddleOne.changeYDelta(paddleOne.getPaddleYVel());
+        paddleTwo.changeYDelta(paddleTwo.getPaddleYVel());
     }
-
-    public Paddle getPaddleTwo () {
-        return this.paddleTwo;
-    }
-
-
-    
 }

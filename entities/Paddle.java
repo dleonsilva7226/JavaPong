@@ -8,6 +8,7 @@ public class Paddle {
     //Location of Paddle
     private float paddleXDelta = 0;
     private float paddleYDelta = 0;
+    private float paddleYVel;
     
     
     public Paddle (int playerNum) {
@@ -18,13 +19,14 @@ public class Paddle {
             this.paddleXDelta = Constants.paddleTwoXStart;
             this.paddleYDelta = Constants.paddleTwoYStart;
         }
+        this.paddleYVel = 0;
     }
 
-    //Incorporate Collision Detection so that Paddle Does not Go Too Up or Too Down
-    public void setYDelta(float yDelta) {
-        if (yDelta >= 0 && yDelta + Constants.paddleHeight < GameWindow.screenHeight) {
-            this.paddleYDelta = yDelta;
-        } else if (yDelta < 0){
+
+    public void changeYDelta (float yVel) {
+        if (this.paddleYDelta + yVel >= 0 && this.paddleYDelta + yVel + Constants.paddleHeight < GameWindow.screenHeight) {
+            this.paddleYDelta += yVel;
+        } else if (yVel + this.paddleYDelta < 0){
             this.paddleYDelta = 5;
         } else {
             this.paddleYDelta = GameWindow.screenHeight - Constants.paddleHeight - 5;
@@ -49,5 +51,13 @@ public class Paddle {
 
     public Color getPaddleColor() {
         return Constants.paddleColor;
+    }
+
+    public float getPaddleYVel () {
+        return this.paddleYVel;
+    }
+
+    public void setPaddleYVel (float newYVel) {
+        this.paddleYVel = newYVel;
     }
 }

@@ -29,6 +29,9 @@ public class KeyboardInputs implements KeyListener{
     public Paddle paddleOneRef;
     public Paddle paddleTwoRef;
 
+    //CURRENT YVELOCITY OF PADDLE
+    // public float velY;
+
     public KeyboardInputs (GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         this.paddleOneRef = gamePanel.paddleOne;
@@ -42,32 +45,40 @@ public class KeyboardInputs implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //ATTEMPTING TO GET SMOOTHER MOVEMENT OF THE PADDLES
         switch (e.getKeyCode()) {
             case playerOnePaddleUp:
-                this.paddleOneRef.setYDelta(paddleOneRef.getYDelta() - 10);
-                // gamePanel.setVelY(5);
+                this.paddleOneRef.setPaddleYVel(-5);
                 break;
             case playerOnePaddleDown:
-                this.paddleOneRef.setYDelta(paddleOneRef.getYDelta() + 10);
-                // gamePanel.setVelY(5);
+                this.paddleOneRef.setPaddleYVel(5);
                 break;
             case playerTwoPaddleUp:
-                this.paddleTwoRef.setYDelta(paddleTwoRef.getYDelta() - 10);
-                // gamePanel.setVelY(5);
+                this.paddleTwoRef.setPaddleYVel(-5);
                 break;
             case playerTwoPaddleDown:
-                this.paddleTwoRef.setYDelta(paddleTwoRef.getYDelta() + 10);
-                // gamePanel.setVelY(5);
+                this.paddleTwoRef.setPaddleYVel(5);
                 break;
         }
         System.out.println("Key Pressed: " + KeyEvent.getKeyText(e.getKeyCode()));
-        
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-    
+        switch (e.getKeyCode()) {
+            case playerOnePaddleUp:
+                this.paddleOneRef.setPaddleYVel(0);
+                break;
+            case playerOnePaddleDown:
+                this.paddleOneRef.setPaddleYVel(0);
+                break;
+            case playerTwoPaddleUp:
+                this.paddleTwoRef.setPaddleYVel(0);
+                break;
+            case playerTwoPaddleDown:
+                this.paddleTwoRef.setPaddleYVel(0);
+                break;
+        }
+        System.out.println("Key Released: " + KeyEvent.getKeyText(e.getKeyCode()));
     }
     
 }

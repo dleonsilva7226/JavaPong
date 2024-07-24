@@ -26,6 +26,7 @@ public class GameWindow {
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.add(gamePanel);
+        jFrame.pack();
         jFrame.setResizable(false);
         jFrame.setVisible(true);
     }

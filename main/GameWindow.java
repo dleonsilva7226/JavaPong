@@ -18,10 +18,13 @@ public class GameWindow {
     protected final static int playerTwoPaddleUp = KeyEvent.VK_UP;
     protected final static int playerTwoPaddleDown = KeyEvent.VK_DOWN;
 
+    //PLAYER SCORES 
+    protected static int playerOneScore = 0;
+    protected static int playerTwoScore = 0;
+
     public GameWindow (GamePanel gamePanel) {
         jFrame = new JFrame();
-
-        jFrame.setTitle("PlayerOne Score <INSERT-NUM>, PlayerTwo Score<INSERT-NUM>");
+        jFrame.setTitle("P1 Score: " + playerOneScore + "                    P2 Score: " + playerTwoScore);
         jFrame.setSize(screenWidth, screenHeight);
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,6 +33,15 @@ public class GameWindow {
         jFrame.setResizable(false);
         jFrame.setVisible(true);
     }
+
+    public void setPauseTitle () {
+        jFrame.setTitle("gAmE iS pAuSeD");
+    }
+
+    public void setUnpauseTitle() {
+        jFrame.setTitle("P1 Score: " + playerOneScore + "                    P2 Score: " + playerTwoScore);
+    }
+    
 
     // public int getWindowWidth() {
     //     return GameWindow.screenWidth;

@@ -36,8 +36,11 @@ public class Game implements Runnable {
             if (currentFrame - lastFrame >= timePerFrame) {
                 //Pauses the Game if the isPaused Variable is true
                 if (!GamePanel.isPaused) {
+                    gameWindow.setUnpauseTitle();
                     gamePanel.updatePaddleYPos();
                     gamePanel.repaint();
+                } else {
+                    gameWindow.setPauseTitle();
                 }
                 lastFrame = currentFrame;
                 frames++;

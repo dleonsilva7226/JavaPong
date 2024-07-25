@@ -18,6 +18,9 @@ public class GamePanel extends JPanel {
 
     //Panel Color
     private static Color gamePanelColor = Color.BLACK;
+
+    //Game Paused Status
+    public static boolean isPaused = false;
     
     public GamePanel () {
         addKeyListener(new KeyboardInputs(this));

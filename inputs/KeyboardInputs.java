@@ -32,6 +32,13 @@ public class KeyboardInputs implements KeyListener{
     //CURRENT YVELOCITY OF PADDLE
     // public float velY;
 
+    //PAUSE AND UNPAUSE BUTTON
+    protected final static int pauseKey = KeyEvent.VK_P;
+
+    //MOST RECENT PADDLE ONE AND PADDLE TWO VELOCITIES
+    private float recPOneYVel = 0;
+    private float recPTwoYVel = 0;
+
     public KeyboardInputs (GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         this.paddleOneRef = gamePanel.paddleOne;
@@ -46,17 +53,32 @@ public class KeyboardInputs implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
+            case pauseKey:
+                if (GamePanel.isPaused) {
+                    GamePanel.isPaused = false;
+                } else {
+                    GamePanel.isPaused = true;
+                }
+                break;
             case playerOnePaddleUp:
-                this.paddleOneRef.setPaddleYVel(-5);
+                if (!GamePanel.isPaused) {
+                    this.paddleOneRef.setPaddleYVel(-5);
+                }
                 break;
             case playerOnePaddleDown:
-                this.paddleOneRef.setPaddleYVel(5);
+                if (!GamePanel.isPaused) {
+                    this.paddleOneRef.setPaddleYVel(5);
+                } 
                 break;
             case playerTwoPaddleUp:
-                this.paddleTwoRef.setPaddleYVel(-5);
+                if (!GamePanel.isPaused) {
+                    this.paddleTwoRef.setPaddleYVel(-5);
+                }
                 break;
             case playerTwoPaddleDown:
-                this.paddleTwoRef.setPaddleYVel(5);
+                if (!GamePanel.isPaused) {
+                    this.paddleTwoRef.setPaddleYVel(5);
+                }
                 break;
         }
         System.out.println("Key Pressed: " + KeyEvent.getKeyText(e.getKeyCode()));

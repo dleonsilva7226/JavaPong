@@ -34,8 +34,11 @@ public class Game implements Runnable {
         while (true) {
             currentFrame = System.nanoTime();
             if (currentFrame - lastFrame >= timePerFrame) {
-                gamePanel.updatePaddleYPos();
-                gamePanel.repaint();
+                //Pauses the Game if the isPaused Variable is true
+                if (!GamePanel.isPaused) {
+                    gamePanel.updatePaddleYPos();
+                    gamePanel.repaint();
+                }
                 lastFrame = currentFrame;
                 frames++;
             }

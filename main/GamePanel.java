@@ -40,7 +40,9 @@ public class GamePanel extends JPanel {
     
 
     public void paintComponent (Graphics g) {
-        if (!GamePanel.isPaused) {
+        if (!GamePanel.gameStarted) {
+            g.drawImage(Screens.START_SCREEN, 0, 0, null);
+        } else if (!GamePanel.isPaused) {
             super.paintComponent(g);
             g.setColor(Constants.paddleColor);
             //Move Player One's Paddle
@@ -64,30 +66,25 @@ public class GamePanel extends JPanel {
         startGame(currWindow, currJFrame);
         pauseGame(currWindow, currJFrame);
         endGame(currWindow, currJFrame);
-        // if (!GamePanel.isPaused) {
-        //     if (currJFrame.getTitle().equals(Constants.PAUSE_TITLE)) {
-        //         currWindow.setUnpauseTitle();
-        //     }
-        //     updatePaddleYPos();
-        //     return;
-        // } 
-        // currWindow.setPauseTitle();
-
     }
 
     private void startGame(GameWindow currWindow, JFrame currJFrame) {
-
+        if (GamePanel.gameStarted) {
+            currWindow.setPlayingTitle();    
+        } 
     }
 
     private void pauseGame(GameWindow currWindow, JFrame currJFrame) {
         if (!GamePanel.isPaused) {
             if (currJFrame.getTitle().equals(Constants.PAUSE_TITLE)) {
-                currWindow.setUnpauseTitle();
+                currWindow.setPlayingTitle();
             }
             updatePaddleYPos();
             return;
+            
         } 
         currWindow.setPauseTitle();
+        
     }
 
     private void endGame(GameWindow currWindow, JFrame currJFrame) {

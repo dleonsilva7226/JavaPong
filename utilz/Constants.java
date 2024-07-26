@@ -7,8 +7,20 @@ import main.GameWindow;
 public class Constants {
 
     //----------TITLE VARIABLES----------\\
-    public static String unpausedTitle = "P1 Score: " + GameWindow.playerOneScore + "                    P2 Score: " + GameWindow.playerTwoScore;
-    public final static String PAUSE_TITLE = "gAmE iS pAuSeD";
+    //Currently Playing Title
+    public static String playingTitle = "P1 Score: " + GameWindow.playerOneScore + "                    P2 Score: " + GameWindow.playerTwoScore;
+
+    //Paused Title
+    public final static String PAUSE_TITLE = "Game is Paused!";
+
+    //Start Title
+    public final static String START_TITLE = "Welcome to JPong!";
+
+    //Lost Game Title
+    public final static String LOST_TITLE = "Game Over! You Lose!";
+
+    //Won Game Title
+    public final static String WON_TITLE = "Congratulations! You Win!";
 
     //----------END OF TITLE VARIABLES----------\\
 

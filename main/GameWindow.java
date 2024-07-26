@@ -29,7 +29,7 @@ public class GameWindow {
 
     public GameWindow (GamePanel gamePanel) {
         jFrame = new JFrame();
-        jFrame.setTitle(Constants.unpausedTitle);
+        jFrame.setTitle(Constants.START_TITLE);
         jFrame.setSize(screenWidth, screenHeight);
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,10 +43,10 @@ public class GameWindow {
         jFrame.setTitle(Constants.PAUSE_TITLE);
     }
 
-    public void setUnpauseTitle() {
-        jFrame.setTitle(Constants.unpausedTitle);
+    public void setPlayingTitle() {
+        jFrame.setTitle(Constants.playingTitle);
     }
-
+    
     public int getWindowWidth() {
         return screenWidth;
     }
@@ -59,12 +59,16 @@ public class GameWindow {
         return this.jFrame;
     }
 
-    public String getUnpausedTitle() {
-        return  Constants.unpausedTitle;
+    public String getPlayingTitle() {
+        return Constants.playingTitle;
     }
     
     public String getPauseTitle() {
         return Constants.PAUSE_TITLE;
+    }
+
+    public String getStartTitle() {
+        return Constants.START_TITLE;
     }
 
     public int getPlayerOneScore() {

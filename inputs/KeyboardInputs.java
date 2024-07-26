@@ -32,8 +32,9 @@ public class KeyboardInputs implements KeyListener{
     //CURRENT YVELOCITY OF PADDLE
     // public float velY;
 
-    //PAUSE AND UNPAUSE BUTTON
+    //START, PAUSE, END BUTTONS
     protected final static int pauseKey = KeyEvent.VK_P;
+    protected final static int startKey = KeyEvent.VK_SPACE;
 
     public KeyboardInputs (GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -49,6 +50,11 @@ public class KeyboardInputs implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
+            case startKey:
+                if (!GamePanel.gameStarted) {
+                    GamePanel.gameStarted = true;
+                } 
+                break;
             case pauseKey:
                 if (GamePanel.isPaused) {
                     GamePanel.isPaused = false;

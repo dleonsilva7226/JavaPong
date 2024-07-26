@@ -13,8 +13,8 @@ public class Screens {
 
     //Implement Images For Different Game States Here Below!
     public static final Image PAUSE_SCREEN = new ImageIcon(PAUSE_IMG).getImage();
-    // public static final Image PAUSE_SCREEN = new ImageIcon(PAUSE_IMG).getImage();
-    // public static final Image PAUSE_SCREEN = new ImageIcon(PAUSE_IMG).getImage();
-    // public static final Image PAUSE_SCREEN = new ImageIcon(PAUSE_IMG).getImage();
-    // public static final Image PAUSE_SCREEN = new ImageIcon(PAUSE_IMG).getImage();
+    public static final Image START_SCREEN = new ImageIcon(START_IMG).getImage();
+    public static final Image INSTRUCTIONS_SCREEN = new ImageIcon(INSTRUCTIONS_IMG).getImage();
+    public static final Image WIN_SCREEN = new ImageIcon(WIN_IMG).getImage();
+    public static final Image LOSE_SCREEN = new ImageIcon(LOSE_IMG).getImage();
 }

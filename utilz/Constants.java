@@ -2,11 +2,21 @@ package utilz;
 
 import java.awt.Color;
 
+import main.GameWindow;
+
 public class Constants {
+
+    //----------TITLE VARIABLES----------\\
+    public static String unpausedTitle = "P1 Score: " + GameWindow.playerOneScore + "                    P2 Score: " + GameWindow.playerTwoScore;
+    public final static String PAUSE_TITLE = "gAmE iS pAuSeD";
+
+    //----------END OF TITLE VARIABLES----------\\
+
+    
 
     //----------PADDLE VARIABLES----------\\
     //Dimensions and the Color of the Pong Paddles
-    public final static int paddleHeight = 70;
+    public final static int paddleHeight = 80;
     public final static int paddleWidth = 10;
     public final static Color paddleColor = Color.WHITE;
 
@@ -19,6 +29,8 @@ public class Constants {
     public static final float paddleTwoYStart = 300 - paddleHeight;
 
     //----------END OF PADDLE VARIABLES----------\\
+
+
 
 
 

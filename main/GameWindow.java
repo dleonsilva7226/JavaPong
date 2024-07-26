@@ -1,5 +1,10 @@
 package main;
 import javax.swing.*;
+
+import utilz.Constants;
+import utilz.Screens;
+
+import java.awt.Image;
 import java.awt.event.*;
 public class GameWindow {
 
@@ -19,12 +24,12 @@ public class GameWindow {
     protected final static int playerTwoPaddleDown = KeyEvent.VK_DOWN;
 
     //PLAYER SCORES 
-    protected static int playerOneScore = 0;
-    protected static int playerTwoScore = 0;
+    public static int playerOneScore = 0;
+    public static int playerTwoScore = 0;
 
     public GameWindow (GamePanel gamePanel) {
         jFrame = new JFrame();
-        jFrame.setTitle("P1 Score: " + playerOneScore + "                    P2 Score: " + playerTwoScore);
+        jFrame.setTitle(Constants.unpausedTitle);
         jFrame.setSize(screenWidth, screenHeight);
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,19 +40,39 @@ public class GameWindow {
     }
 
     public void setPauseTitle () {
-        jFrame.setTitle("gAmE iS pAuSeD");
+        jFrame.setTitle(Constants.PAUSE_TITLE);
     }
 
     public void setUnpauseTitle() {
-        jFrame.setTitle("P1 Score: " + playerOneScore + "                    P2 Score: " + playerTwoScore);
+        jFrame.setTitle(Constants.unpausedTitle);
+    }
+
+    public int getWindowWidth() {
+        return screenWidth;
+    }
+
+    public int getWindowHeight() {
+        return screenHeight;
+    }
+
+    public JFrame getJFrame() {
+        return this.jFrame;
+    }
+
+    public String getUnpausedTitle() {
+        return  Constants.unpausedTitle;
     }
     
+    public String getPauseTitle() {
+        return Constants.PAUSE_TITLE;
+    }
 
-    // public int getWindowWidth() {
-    //     return GameWindow.screenWidth;
-    // }
+    public int getPlayerOneScore() {
+        return playerOneScore;
+    }
+    
+    public int getPlayerTwoScore() {
+        return playerTwoScore;
+    }
 
-    // public int getWindowHeight() {
-    //     return GameWindow.screenHeight;
-    // }
 }

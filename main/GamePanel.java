@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import entities.Ball;
 import entities.Paddle;
 
 import javax.swing.JFrame;
@@ -18,6 +19,9 @@ public class GamePanel extends JPanel {
     //Paddles
     public Paddle paddleOne = new Paddle(1);
     public Paddle paddleTwo = new Paddle(2);
+
+    //Ball
+    public Ball pongBall = new Ball();
 
     //Panel Color
     private static Color gamePanelColor = Color.BLACK;
@@ -38,17 +42,20 @@ public class GamePanel extends JPanel {
         setPreferredSize(size);
     }
     
-
+    //Have a Render Function Here to Not Draw Everything in this PaintComponent Function
     public void paintComponent (Graphics g) {
         if (!GamePanel.gameStarted) {
             g.drawImage(Screens.START_SCREEN, 0, 0, null);
         } else if (!GamePanel.isPaused) {
             super.paintComponent(g);
             g.setColor(Constants.paddleColor);
+            
             //Move Player One's Paddle
             g.fillRect((int)paddleOne.getXDelta(), (int)paddleOne.getYDelta(), Constants.paddleWidth, Constants.paddleHeight);
             //Move Player Two's Paddle
             g.fillRect((int)paddleTwo.getXDelta(), (int)paddleTwo.getYDelta(), Constants.paddleWidth, Constants.paddleHeight);
+            //Move Pong Ball
+            g.fillOval((int) pongBall.getXDelta(), (int) pongBall.getYDelta(), Constants.ballWidth, Constants.ballHeight);
         } else {
             g.drawImage(Screens.PAUSE_SCREEN, 0, 0, null);
         }
@@ -57,6 +64,10 @@ public class GamePanel extends JPanel {
     public void updatePaddleYPos() {
         paddleOne.changeYDelta(paddleOne.getPaddleYVel());
         paddleTwo.changeYDelta(paddleTwo.getPaddleYVel());
+    }
+
+    private void updateBallPos() {
+        pongBall.changeXDelta(pongBall.getBallXVel());
     }
 
 
@@ -80,12 +91,15 @@ public class GamePanel extends JPanel {
                 currWindow.setPlayingTitle();
             }
             updatePaddleYPos();
+            updateBallPos();
             return;
             
         } 
         currWindow.setPauseTitle();
         
     }
+
+    
 
     private void endGame(GameWindow currWindow, JFrame currJFrame) {
         

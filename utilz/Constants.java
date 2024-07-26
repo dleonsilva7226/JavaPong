@@ -52,13 +52,13 @@ public class Constants {
     //MODIFY THE VARIABLES ENTIRELY
 
     //Dimensions and the Color of the Pong Paddles
-    private final static int ballHeight = 70;
-    private final static int ballWidth = 10;
-    private final static Color ballColor = Color.WHITE;
+    public final static int ballHeight = 10;
+    public final static int ballWidth = 10;
+    public final static Color ballColor = Color.WHITE;
 
     //Starting Location of the Ball 
-    public static final float ballXStart = 20;
-    public static final float ballYStart = 300 - paddleHeight;
+    public static final float ballXStart = 450;
+    public static final float ballYStart = 300;
 
     
     //----------END OF BALL VARIABLES----------\\

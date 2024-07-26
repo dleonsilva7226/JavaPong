@@ -1,5 +1,67 @@
 package entities;
 
+import java.awt.Color;
+import java.util.Random;
+
+import utilz.*;
+import main.*;
+
 public class Ball {
-    //DO THIS AT THE LATER PART OF THE PROJECT
+    
+    //Location of Paddle
+    private float ballXDelta;
+    private float ballYDelta;
+    private float ballXVel;
+    private float[] xVels = {-3, 3};
+    private Random randomVelChooser;
+    
+    
+    public Ball () {
+        this.ballXDelta = Constants.ballXStart;
+        this.ballYDelta = Constants.ballYStart;
+        this.randomVelChooser = new Random();
+        int randomNum = randomVelChooser.nextInt(2);
+        this.ballXVel = xVels[randomNum];
+    }
+
+
+    public void changeXDelta (float xVel) {
+        if (ballXDelta + xVel >= 0 && ballXDelta + xVel + Constants.ballWidth < GameWindow.screenWidth) {
+            this.ballXDelta += xVel;
+        } else {
+            if (xVel < 0) {
+                this.ballXVel = xVels[1];
+            } else {
+                this.ballXVel = xVels[0];
+            }
+        }
+    }
+
+    public float getXDelta() {
+        return this.ballXDelta;
+    }
+
+    public float getYDelta() {
+        return this.ballYDelta;
+    }
+    
+    public int getWidth () {
+        return Constants.ballWidth;
+    }
+
+    public int getHeight () {
+        return Constants.ballHeight;
+    }
+
+    public Color getBallColor() {
+        return Constants.ballColor;
+    }
+
+    public float getBallXVel () {
+        return this.ballXVel;
+    }
+
+    public void setPaddleYVel (float newXVel) {
+        this.ballXVel = newXVel;
+    }
 }

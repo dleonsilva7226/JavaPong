@@ -24,6 +24,8 @@ public class GamePanel extends JPanel {
 
     //Game Paused Status
     public static boolean isPaused = false;
+    public static boolean gameStarted = false;
+    public static boolean gameOver = false;
     
     public GamePanel () {
         addKeyListener(new KeyboardInputs(this));
@@ -59,6 +61,25 @@ public class GamePanel extends JPanel {
     public void updateGame() {
         GameWindow currWindow = Game.gameWindow;
         JFrame currJFrame = currWindow.getJFrame();
+        startGame(currWindow, currJFrame);
+        pauseGame(currWindow, currJFrame);
+        endGame(currWindow, currJFrame);
+        // if (!GamePanel.isPaused) {
+        //     if (currJFrame.getTitle().equals(Constants.PAUSE_TITLE)) {
+        //         currWindow.setUnpauseTitle();
+        //     }
+        //     updatePaddleYPos();
+        //     return;
+        // } 
+        // currWindow.setPauseTitle();
+
+    }
+
+    private void startGame(GameWindow currWindow, JFrame currJFrame) {
+
+    }
+
+    private void pauseGame(GameWindow currWindow, JFrame currJFrame) {
         if (!GamePanel.isPaused) {
             if (currJFrame.getTitle().equals(Constants.PAUSE_TITLE)) {
                 currWindow.setUnpauseTitle();
@@ -67,6 +88,9 @@ public class GamePanel extends JPanel {
             return;
         } 
         currWindow.setPauseTitle();
+    }
 
+    private void endGame(GameWindow currWindow, JFrame currJFrame) {
+        
     }
 }

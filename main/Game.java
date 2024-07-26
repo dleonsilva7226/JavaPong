@@ -11,7 +11,7 @@ public class Game implements Runnable {
 
     public Game () {
         this.gamePanel = new GamePanel();
-        this.gameWindow = new GameWindow(gamePanel);
+        gameWindow = new GameWindow(gamePanel);
         gamePanel.setFocusable(true);
         gamePanel.requestFocus();
         startGameLoop();
@@ -30,7 +30,6 @@ public class Game implements Runnable {
         double timePerUpdate = 1000000000.0 / UPS_SET;
 
         long previousTime = System.nanoTime();
-        // long currentTime = System.nanoTime();
         int frames = 0;
         int updates = 0;
 
@@ -55,24 +54,6 @@ public class Game implements Runnable {
                 frames++;
                 deltaF--;
             }
-
-            // if (currentFrame - lastFrame >= timePerFrame) {
-            //     //Pauses the Game if the isPaused Variable is true
-            //     // startGame();
-            //     gamePanel.pauseGame();
-            //     // endGame();
-            //     if (!GamePanel.isPaused) {
-            //         gameWindow.setUnpauseTitle();
-            //         gamePanel.updatePaddleYPos();
-            //         gamePanel.repaint();
-            //     } else {
-            //         // gameWindow.setPauseScreen(GamePanel.isPaused);
-            //         gameWindow.setPauseTitle();
-            //     }
-                
-            //     lastFrame = currentFrame;
-            //     frames++;
-            // }
 
             if (System.currentTimeMillis() - lastCheck >= 1000) {
                 lastCheck = System.currentTimeMillis();

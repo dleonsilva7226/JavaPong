@@ -66,8 +66,8 @@ public class GamePanel extends JPanel {
         paddleTwo.changeYDelta(paddleTwo.getPaddleYVel());
     }
 
-    private void updateBallPos() {
-        pongBall.changeXDelta(pongBall.getBallXVel());
+    private void updateBallPos(boolean ballIsColliding) {
+        pongBall.changeXDelta(pongBall.getBallXVel(), ballIsColliding);
     }
 
 
@@ -91,12 +91,30 @@ public class GamePanel extends JPanel {
                 currWindow.setPlayingTitle();
             }
             updatePaddleYPos();
-            updateBallPos();
+            boolean ballIsColliding = isColliding(pongBall, pongBall.getBallXVel(), 0);
+            updateBallPos(ballIsColliding);
+
             return;
             
         } 
         currWindow.setPauseTitle();
         
+    }
+
+    //Collision Detection. MAKE IT BETTER AND MORE ROBUST
+    public boolean isColliding (Ball pongBall, float xVel, float yVel) {
+        if (pongBall.getXDelta() + xVel < paddleOne.getXDelta() + Constants.paddleWidth) {
+            if (pongBall.getYDelta() >= paddleOne.getYDelta() && pongBall.getYDelta() <= paddleOne.getYDelta() + Constants.paddleHeight) {
+                return true;
+            }
+            
+        } else if (pongBall.getXDelta() + xVel > paddleTwo.getXDelta()) {
+            if (pongBall.getYDelta() >= paddleTwo.getYDelta() && pongBall.getYDelta() <= paddleTwo.getYDelta() + Constants.paddleHeight) {
+                return true;
+            }
+            
+        } 
+        return false;
     }
 
     

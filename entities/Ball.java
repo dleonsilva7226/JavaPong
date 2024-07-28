@@ -13,6 +13,7 @@ public class Ball {
     private float ballYDelta;
     private float ballXVel;
     private float[] xVels = {-3, 3};
+    private float[] yVels = {-3, 3};
     private Random randomVelChooser;
     
     
@@ -25,15 +26,19 @@ public class Ball {
     }
 
 
-    public void changeXDelta (float xVel) {
-        if (ballXDelta + xVel >= 0 && ballXDelta + xVel + Constants.ballWidth < GameWindow.screenWidth) {
-            this.ballXDelta += xVel;
-        } else {
+    public void changeXDelta (float xVel, boolean collidingWithPaddle) {
+        // if (ballXDelta + xVel >= 0 && ballXDelta + xVel + Constants.ballWidth < GameWindow.screenWidth) {
+        //     this.ballXDelta += xVel;
+        // } 
+        
+        if (collidingWithPaddle){
             if (xVel < 0) {
                 this.ballXVel = xVels[1];
             } else {
                 this.ballXVel = xVels[0];
             }
+        } else {
+            this.ballXDelta += xVel;
         }
     }
 
@@ -61,7 +66,18 @@ public class Ball {
         return this.ballXVel;
     }
 
-    public void setPaddleYVel (float newXVel) {
+    public void setBallXVel (float newXVel) {
         this.ballXVel = newXVel;
     }
+
+
+    // public void updateXVel(boolean isColliding) {
+    //     if (isColliding) {
+    //         if (this.ballXVel < 0) {
+    //             this.ballXVel = xVels[1];
+    //         } else {
+    //             this.ballXVel = xVels[0];
+    //         }
+    //     }
+    // }
 }

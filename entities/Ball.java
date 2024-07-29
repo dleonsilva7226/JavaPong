@@ -29,7 +29,7 @@ public class Ball {
 
     //Collision Bug: When moving the paddle and the ball goes over the paddle,
     //with the right timing, the ball can still come back and deflect to the
-    //screen
+    //screen. Another bug: Ball will sometimes stop when going past paddle.
     public void changeXDelta (float xVel, boolean collidingWithPaddle) {
         // if (ballXDelta + xVel >= 0 && ballXDelta + xVel + Constants.ballWidth < GameWindow.screenWidth) {
         //     this.ballXDelta += xVel;
@@ -45,6 +45,26 @@ public class Ball {
             this.ballXDelta += xVel;
         }
     }
+
+
+    //Implement YDelta OR Movement Here
+    // public void changeXDelta (float xVel, boolean collidingWithPaddle) {
+    //     // if (ballXDelta + xVel >= 0 && ballXDelta + xVel + Constants.ballWidth < GameWindow.screenWidth) {
+    //     //     this.ballXDelta += xVel;
+    //     // } 
+        
+    //     if (collidingWithPaddle){
+    //         if (xVel < 0) {
+    //             this.ballXVel = xVels[1];
+    //         } else {
+    //             this.ballXVel = xVels[0];
+    //         }
+    //     } else {
+    //         this.ballXDelta += xVel;
+    //     }
+    // }
+
+
 
     public float getXDelta() {
         return this.ballXDelta;

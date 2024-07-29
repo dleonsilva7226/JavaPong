@@ -63,17 +63,17 @@ public class KeyboardInputs implements KeyListener{
                 }
                 break;
             case playerOnePaddleUp:
-                this.paddleOneRef.setPaddleYVel(-5);
+                this.paddleOneRef.setPaddleYVel(-4);
                 break;
             case playerOnePaddleDown:
-                this.paddleOneRef.setPaddleYVel(5);   
+                this.paddleOneRef.setPaddleYVel(4);   
                 break;
             case playerTwoPaddleUp:
-                this.paddleTwoRef.setPaddleYVel(-5);
+                this.paddleTwoRef.setPaddleYVel(-4);
                 break;
             case playerTwoPaddleDown:
                 
-                this.paddleTwoRef.setPaddleYVel(5);
+                this.paddleTwoRef.setPaddleYVel(4);
                 break;
         }
         System.out.println("Key Pressed: " + KeyEvent.getKeyText(e.getKeyCode()));

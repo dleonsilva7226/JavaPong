@@ -14,6 +14,7 @@ public class Ball {
     private float ballXVel;
     private float[] xVels = {-3, 3};
     private float[] yVels = {-3, 3};
+    private float[] initXVels = {-1, 1};
     private Random randomVelChooser;
     
     
@@ -22,10 +23,13 @@ public class Ball {
         this.ballYDelta = Constants.ballYStart;
         this.randomVelChooser = new Random();
         int randomNum = randomVelChooser.nextInt(2);
-        this.ballXVel = xVels[randomNum];
+        this.ballXVel = initXVels[randomNum];
     }
 
 
+    //Collision Bug: When moving the paddle and the ball goes over the paddle,
+    //with the right timing, the ball can still come back and deflect to the
+    //screen
     public void changeXDelta (float xVel, boolean collidingWithPaddle) {
         // if (ballXDelta + xVel >= 0 && ballXDelta + xVel + Constants.ballWidth < GameWindow.screenWidth) {
         //     this.ballXDelta += xVel;

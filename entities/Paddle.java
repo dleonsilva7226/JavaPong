@@ -9,6 +9,8 @@ public class Paddle {
     private float paddleXDelta = 0;
     private float paddleYDelta = 0;
     private float paddleYVel;
+    public int playerNum;
+    public int playerScore;
     
     
     public Paddle (int playerNum) {
@@ -19,7 +21,9 @@ public class Paddle {
             this.paddleXDelta = Constants.paddleTwoXStart;
             this.paddleYDelta = Constants.paddleTwoYStart;
         }
+        this.playerNum = playerNum;
         this.paddleYVel = 0;
+        this.playerScore = 0;
     }
 
 
@@ -57,7 +61,23 @@ public class Paddle {
         return this.paddleYVel;
     }
 
+    public int getPlayerNum () {
+        return this.playerNum;
+    }
+
+    public int getPlayerScore () {
+        return this.playerScore;
+    }
+
     public void setPaddleYVel (float newYVel) {
         this.paddleYVel = newYVel;
     }
+    
+    public void addPoint() {
+        playerScore++;
+        if (playerScore == 10) {
+            GamePanel.gameOver = true;
+        }
+    }
+    
 }

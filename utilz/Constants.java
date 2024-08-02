@@ -8,7 +8,6 @@ public class Constants {
 
     //----------TITLE VARIABLES----------\\
     //Currently Playing Title
-    public static String playingTitle = "P1 Score: " + GameWindow.playerOneScore + "                    P2 Score: " + GameWindow.playerTwoScore;
 
     //Paused Title
     public final static String PAUSE_TITLE = "Game is Paused!";

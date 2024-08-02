@@ -1,6 +1,7 @@
 package main;
 import javax.swing.*;
 
+import entities.Paddle;
 import utilz.Constants;
 import utilz.Screens;
 
@@ -24,8 +25,8 @@ public class GameWindow {
     protected final static int playerTwoPaddleDown = KeyEvent.VK_DOWN;
 
     //PLAYER SCORES 
-    public static int playerOneScore = 0;
-    public static int playerTwoScore = 0;
+    // public static int playerOneScore = 0;
+    // public static int playerTwoScore = 0;
 
     public GameWindow (GamePanel gamePanel) {
         jFrame = new JFrame();
@@ -43,8 +44,12 @@ public class GameWindow {
         jFrame.setTitle(Constants.PAUSE_TITLE);
     }
 
-    public void setPlayingTitle() {
-        jFrame.setTitle(Constants.playingTitle);
+    public void setPlayingTitle(int pOneScore, int pTwoScore) {
+        jFrame.setTitle("P1 Score: " + pOneScore + "                    P2 Score: " + pTwoScore);
+    }
+
+    public void setScore(Paddle player) {
+        player.addPoint();
     }
     
     public int getWindowWidth() {
@@ -59,9 +64,9 @@ public class GameWindow {
         return this.jFrame;
     }
 
-    public String getPlayingTitle() {
-        return Constants.playingTitle;
-    }
+    // public String getPlayingTitle() {
+    //     return Constants.playingTitle;
+    // }
     
     public String getPauseTitle() {
         return Constants.PAUSE_TITLE;
@@ -71,12 +76,12 @@ public class GameWindow {
         return Constants.START_TITLE;
     }
 
-    public int getPlayerOneScore() {
-        return playerOneScore;
-    }
+    // public int getPlayerOneScore() {
+    //     return playerOneScore;
+    // }
     
-    public int getPlayerTwoScore() {
-        return playerTwoScore;
-    }
+    // public int getPlayerTwoScore() {
+    //     return playerTwoScore;
+    // }
 
 }

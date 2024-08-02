@@ -30,6 +30,7 @@ public class GamePanel extends JPanel {
     public static boolean isPaused = false;
     public static boolean gameStarted = false;
     public static boolean gameOver = false;
+
     
     public GamePanel () {
         addKeyListener(new KeyboardInputs(this));
@@ -44,21 +45,49 @@ public class GamePanel extends JPanel {
     
     //Have a Render Function Here to Not Draw Everything in this PaintComponent Function
     public void paintComponent (Graphics g) {
+        render(g);
+    }
+
+    private void render(Graphics g) {
+        GameWindow currWindow = Game.gameWindow;
+        JFrame currJFrame = currWindow.getJFrame();
         if (!GamePanel.gameStarted) {
-            g.drawImage(Screens.START_SCREEN, 0, 0, null);
+            gameNotStarted(g, currWindow, currJFrame);
         } else if (!GamePanel.isPaused) {
-            super.paintComponent(g);
+            currentlyPlaying(g, currWindow, currJFrame);
+        } else if (GamePanel.isPaused){
+            currentlyPaused(g, currWindow, currJFrame);
+        } else {
+            gameOver(g, currWindow, currJFrame);
+        }
+    }
+
+    private void gameOver(Graphics g, GameWindow currWindow, JFrame currJFrame) {
+
+    }
+
+    public void gameNotStarted(Graphics g, GameWindow currWindow, JFrame currJFrame) {
+        
+        if (GamePanel.gameStarted) {
+            currWindow.setPlayingTitle(paddleOne.getPlayerScore(), paddleTwo.getPlayerScore());    
+        } 
+        g.drawImage(Screens.START_SCREEN, 0, 0, null);
+
+    }
+
+    public void currentlyPaused(Graphics g, GameWindow currWindow, JFrame currJFrame) {
+        g.drawImage(Screens.PAUSE_SCREEN, 0, 0, null);
+    }
+
+    public void currentlyPlaying (Graphics g, GameWindow currWindow, JFrame currJFrame) {
+        super.paintComponent(g);
             g.setColor(Constants.paddleColor);
-            
             //Move Player One's Paddle
             g.fillRect((int)paddleOne.getXDelta(), (int)paddleOne.getYDelta(), Constants.paddleWidth, Constants.paddleHeight);
             //Move Player Two's Paddle
             g.fillRect((int)paddleTwo.getXDelta(), (int)paddleTwo.getYDelta(), Constants.paddleWidth, Constants.paddleHeight);
             //Move Pong Ball
             g.fillOval((int) pongBall.getXDelta(), (int) pongBall.getYDelta(), Constants.ballWidth, Constants.ballHeight);
-        } else {
-            g.drawImage(Screens.PAUSE_SCREEN, 0, 0, null);
-        }
     }
 
     public void updatePaddleYPos() {
@@ -78,20 +107,20 @@ public class GamePanel extends JPanel {
         GameWindow currWindow = Game.gameWindow;
         JFrame currJFrame = currWindow.getJFrame();
         startGame(currWindow, currJFrame);
-        pauseGame(currWindow, currJFrame);
-        endGame(currWindow, currJFrame);
+        updateGameState(currWindow, currJFrame);
+        // endGame(currWindow, currJFrame);
     }
 
     private void startGame(GameWindow currWindow, JFrame currJFrame) {
         if (GamePanel.gameStarted) {
-            currWindow.setPlayingTitle();    
+            currWindow.setPlayingTitle(paddleOne.getPlayerScore(), paddleTwo.getPlayerScore());    
         } 
     }
 
-    private void pauseGame(GameWindow currWindow, JFrame currJFrame) {
+    private void updateGameState(GameWindow currWindow, JFrame currJFrame) {
         if (!GamePanel.isPaused) {
             if (currJFrame.getTitle().equals(Constants.PAUSE_TITLE)) {
-                currWindow.setPlayingTitle();
+                currWindow.setPlayingTitle(paddleOne.getPlayerScore(), paddleTwo.getPlayerScore());
             }
             updatePaddleYPos();
             boolean ballIsColliding = isColliding(pongBall, pongBall.getBallXVel(), pongBall.getBallYVel());
@@ -123,9 +152,4 @@ public class GamePanel extends JPanel {
         return false;
     }
 
-    
-
-    private void endGame(GameWindow currWindow, JFrame currJFrame) {
-        
-    }
 }

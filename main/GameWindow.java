@@ -76,6 +76,14 @@ public class GameWindow {
         return Constants.START_TITLE;
     }
 
+    public void setPaddleOneWinTitle() {
+        jFrame.setTitle("Player 1 Wins!");
+    }
+
+    public void setPaddleTwoWinTitle() {
+        jFrame.setTitle("Player 2 Wins!");
+    }
+
     // public int getPlayerOneScore() {
     //     return playerOneScore;
     // }

@@ -17,8 +17,8 @@ import utilz.Screens;
 
 public class GamePanel extends JPanel {
     //Paddles
-    public Paddle paddleOne = new Paddle(1);
-    public Paddle paddleTwo = new Paddle(2);
+    public Paddle paddleOne = new Paddle(1); //Player One
+    public Paddle paddleTwo = new Paddle(2); //Player Two
 
     //Ball
     public Ball pongBall = new Ball();
@@ -43,7 +43,6 @@ public class GamePanel extends JPanel {
         setPreferredSize(size);
     }
     
-    //Have a Render Function Here to Not Draw Everything in this PaintComponent Function
     public void paintComponent (Graphics g) {
         render(g);
     }
@@ -51,36 +50,44 @@ public class GamePanel extends JPanel {
     private void render(Graphics g) {
         GameWindow currWindow = Game.gameWindow;
         JFrame currJFrame = currWindow.getJFrame();
-        if (!GamePanel.gameStarted) {
-            gameNotStarted(g, currWindow, currJFrame);
-        } else if (!GamePanel.isPaused) {
-            currentlyPlaying(g, currWindow, currJFrame);
-        } else if (GamePanel.isPaused){
-            currentlyPaused(g, currWindow, currJFrame);
-        } else {
-            gameOver(g, currWindow, currJFrame);
-        }
+        gameNotStarted(g, currWindow, currJFrame);
+        currentlyPlaying(g, currWindow, currJFrame);
+        currentlyPaused(g, currWindow, currJFrame);
+        gameOver(g, currWindow, currJFrame);
     }
 
     private void gameOver(Graphics g, GameWindow currWindow, JFrame currJFrame) {
-
+        if (GamePanel.gameOver) {
+            if (paddleOne.getPlayerScore() == 10) {
+                currWindow.setPaddleOneWinTitle();
+                g.drawImage(Screens.P1_WIN_SCREEN, 0, 0, null);
+                return;
+            } else {
+                currWindow.setPaddleTwoWinTitle();
+                g.drawImage(Screens.P2_WIN_SCREEN, 0, 0, null);
+            }
+        }
     }
 
     public void gameNotStarted(Graphics g, GameWindow currWindow, JFrame currJFrame) {
-        
-        if (GamePanel.gameStarted) {
-            currWindow.setPlayingTitle(paddleOne.getPlayerScore(), paddleTwo.getPlayerScore());    
-        } 
-        g.drawImage(Screens.START_SCREEN, 0, 0, null);
+        if (!GamePanel.gameStarted) {
+            currWindow.getStartTitle();
+            g.drawImage(Screens.START_SCREEN, 0, 0, null);    
+        }
 
     }
 
     public void currentlyPaused(Graphics g, GameWindow currWindow, JFrame currJFrame) {
-        g.drawImage(Screens.PAUSE_SCREEN, 0, 0, null);
+        if (GamePanel.isPaused) {
+            g.drawImage(Screens.PAUSE_SCREEN, 0, 0, null);
+            currWindow.setPauseTitle();
+        }
     }
 
     public void currentlyPlaying (Graphics g, GameWindow currWindow, JFrame currJFrame) {
-        super.paintComponent(g);
+        if (GamePanel.gameStarted && !GamePanel.isPaused) {
+            currWindow.setPlayingTitle(paddleOne.getPlayerScore(), paddleTwo.getPlayerScore());
+            super.paintComponent(g);
             g.setColor(Constants.paddleColor);
             //Move Player One's Paddle
             g.fillRect((int)paddleOne.getXDelta(), (int)paddleOne.getYDelta(), Constants.paddleWidth, Constants.paddleHeight);
@@ -88,6 +95,7 @@ public class GamePanel extends JPanel {
             g.fillRect((int)paddleTwo.getXDelta(), (int)paddleTwo.getYDelta(), Constants.paddleWidth, Constants.paddleHeight);
             //Move Pong Ball
             g.fillOval((int) pongBall.getXDelta(), (int) pongBall.getYDelta(), Constants.ballWidth, Constants.ballHeight);
+        }
     }
 
     public void updatePaddleYPos() {
@@ -98,7 +106,7 @@ public class GamePanel extends JPanel {
     private void updateBallPos(boolean ballIsColliding) {
         pongBall.changeXDelta(pongBall.getBallXVel(), ballIsColliding);
 
-        //FIX THE ERRORS FOR THE Y COORDINATES OF THE BALL
+        // FIX THE ERRORS FOR THE Y COORDINATES OF THE BALL
         // pongBall.changeYDelta(pongBall.getBallYVel(), ballIsColliding);
     }
 
@@ -106,31 +114,29 @@ public class GamePanel extends JPanel {
     public void updateGame() {
         GameWindow currWindow = Game.gameWindow;
         JFrame currJFrame = currWindow.getJFrame();
-        startGame(currWindow, currJFrame);
         updateGameState(currWindow, currJFrame);
-        // endGame(currWindow, currJFrame);
     }
 
-    private void startGame(GameWindow currWindow, JFrame currJFrame) {
-        if (GamePanel.gameStarted) {
-            currWindow.setPlayingTitle(paddleOne.getPlayerScore(), paddleTwo.getPlayerScore());    
-        } 
-    }
+    // private void startGame(GameWindow currWindow, JFrame currJFrame) {
+    //     if (GamePanel.gameStarted) {
+    //         currWindow.setPlayingTitle(paddleOne.getPlayerScore(), paddleTwo.getPlayerScore());    
+    //     } 
+    // }
 
     private void updateGameState(GameWindow currWindow, JFrame currJFrame) {
         if (!GamePanel.isPaused) {
-            if (currJFrame.getTitle().equals(Constants.PAUSE_TITLE)) {
-                currWindow.setPlayingTitle(paddleOne.getPlayerScore(), paddleTwo.getPlayerScore());
-            }
+            // if (currJFrame.getTitle().equals(Constants.PAUSE_TITLE)) {
+            //     currWindow.setPlayingTitle(paddleOne.getPlayerScore(), paddleTwo.getPlayerScore());
+            // }
             updatePaddleYPos();
             boolean ballIsColliding = isColliding(pongBall, pongBall.getBallXVel(), pongBall.getBallYVel());
             updateBallPos(ballIsColliding);
-
-            return;
-            
+            if (pongBall.getXDelta() <= 0) {
+                paddleOne.addPoint();
+            } else if (pongBall.getXDelta() >= GameWindow.screenWidth) {
+                paddleTwo.addPoint();
+            }
         } 
-        currWindow.setPauseTitle();
-        
     }
 
     //Collision Detection. MAKE IT BETTER AND MORE ROBUST. FIX THE ERRORS FOR THE Y PART

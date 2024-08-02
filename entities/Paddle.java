@@ -75,6 +75,7 @@ public class Paddle {
     
     public void addPoint() {
         playerScore++;
+        // playerScore += 10;
         if (playerScore == 10) {
             GamePanel.gameOver = true;
         }

@@ -33,11 +33,11 @@ public class Constants {
 
     //Starting Location of the PlayerOne Paddle
     public static final float paddleOneXStart = 20;
-    public static final float paddleOneYStart = 300 - paddleHeight;
+    public static final float paddleOneYStart = 350 - paddleHeight;
     
     //Starting Location of the PlayerTwo Paddle
     public static final float paddleTwoXStart = 880 - paddleWidth;
-    public static final float paddleTwoYStart = 300 - paddleHeight;
+    public static final float paddleTwoYStart = 350 - paddleHeight;
 
     //----------END OF PADDLE VARIABLES----------\\
 

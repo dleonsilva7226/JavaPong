@@ -74,11 +74,19 @@ public class Paddle {
     }
     
     public void addPoint() {
-        playerScore++;
         // playerScore += 10;
-        if (playerScore == 10) {
+        if (playerScore == 9) {
             GamePanel.gameOver = true;
+            return;
         }
+        playerScore++;
+    }
+
+    public void setXDelta(float newVal) {
+        this.paddleXDelta = newVal;
+    }
+    public void setYDelta(float newVal) {
+        this.paddleYDelta = newVal;
     }
     
 }

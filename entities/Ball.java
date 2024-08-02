@@ -101,6 +101,13 @@ public class Ball {
         return this.ballYVel;
     }
 
+    public void setXDelta(float newVal) {
+        this.ballXDelta = newVal;
+    }
+    public void setYDelta(float newVal) {
+        this.ballYDelta = newVal;
+    }
+
 
     // public void updateXVel(boolean isColliding) {
     //     if (isColliding) {

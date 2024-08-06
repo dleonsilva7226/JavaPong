@@ -105,11 +105,9 @@ public class GamePanel extends JPanel {
         paddleTwo.changeYDelta(paddleTwo.getPaddleYVel());
     }
 
-    private void updateBallPos(boolean ballIsColliding) {
-        pongBall.changeXDelta(pongBall.getBallXVel(), ballIsColliding);
-
-        // FIX THE ERRORS FOR THE Y COORDINATES OF THE BALL
-        // pongBall.changeYDelta(pongBall.getBallYVel(), ballIsColliding);
+    private void updateBallPos(boolean ballIsCollidingX, boolean ballIsCollidingY) {
+        pongBall.changeXDelta(pongBall.getBallXVel(), ballIsCollidingX);
+        pongBall.changeYDelta(pongBall.getBallYVel(), ballIsCollidingY);
     }
 
 
@@ -122,8 +120,9 @@ public class GamePanel extends JPanel {
     private void updateGameState(GameWindow currWindow, JFrame currJFrame) {
         if (!GamePanel.isPaused) {
             updatePaddleYPos();
-            boolean ballIsColliding = isColliding(pongBall, pongBall.getBallXVel(), pongBall.getBallYVel());
-            updateBallPos(ballIsColliding);
+            boolean ballIsCollidingX = xIsColliding(pongBall, pongBall.getBallXVel(), pongBall.getBallYVel());
+            boolean ballIsCollidingY = yIsColliding(pongBall, pongBall.getBallXVel(), pongBall.getBallYVel());
+            updateBallPos(ballIsCollidingX, ballIsCollidingY);
             if (pongBall.getXDelta() <= 0) {
                 currWindow.setScore(paddleTwo);
                 restart(2);
@@ -152,7 +151,7 @@ public class GamePanel extends JPanel {
     }
 
     //Collision Detection. MAKE IT BETTER AND MORE ROBUST. FIX THE ERRORS FOR THE Y PART
-    public boolean isColliding (Ball pongBall, float xVel, float yVel) {
+    public boolean xIsColliding (Ball pongBall, float xVel, float yVel) {
         if (pongBall.getXDelta() + xVel < paddleOne.getXDelta() + Constants.paddleWidth) {
             if (pongBall.getYDelta() >= paddleOne.getYDelta() && pongBall.getYDelta() <= paddleOne.getYDelta() + Constants.paddleHeight) {
                 return true;
@@ -162,12 +161,25 @@ public class GamePanel extends JPanel {
             if (pongBall.getYDelta() >= paddleTwo.getYDelta() && pongBall.getYDelta() <= paddleTwo.getYDelta() + Constants.paddleHeight) {
                 return true;
             }  
-        } else if (pongBall.getYDelta() <= 0) {
+        } 
+        // else if (pongBall.getYDelta() - pongBall.getHeight() <= 0) {
+        //     return true;
+        // } else if (pongBall.getYDelta() + pongBall.getHeight() >= GameWindow.screenHeight) {
+        //     return true;
+        // }
+        return false;
+    }
+
+    public boolean yIsColliding (Ball pongBall, float xVel, float yVel) {
+        if (pongBall.getYDelta() - pongBall.getHeight() <= 0) {
             return true;
-        } else if (pongBall.getYDelta() >= GameWindow.screenHeight) {
+        } else if (pongBall.getYDelta() + pongBall.getHeight() >= GameWindow.screenHeight) {
             return true;
         }
         return false;
     }
+
+
+
 
 }

@@ -13,8 +13,8 @@ public class Ball {
     private float ballYDelta;
     private float ballXVel;
     private float ballYVel;
-    private float[] xVels = {-3, 3};
-    private float[] yVels = {-3, 3};
+    private float[] xVels = {-2, 2};
+    private float[] yVels = {-2, 2};
     private float[] initVels = {-1, 1};
     private Random randomVelChooser;
     
@@ -43,8 +43,11 @@ public class Ball {
             } else {
                 this.ballXVel = xVels[0];
             }
-        }
+            xVel = this.ballXVel;
+        } 
         this.ballXDelta += xVel;
+        
+        
     }
 
 
@@ -60,8 +63,10 @@ public class Ball {
             } else {
                 this.ballYVel = yVels[0];
             }
+            yVel = this.ballYVel;
         } 
         this.ballYDelta += yVel;
+        
     }
 
     public float getXDelta() {

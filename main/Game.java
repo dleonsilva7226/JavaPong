@@ -36,7 +36,7 @@ public class Game implements Runnable {
         double deltaU = 0;
         double deltaF = 0;
         long lastCheck = System.currentTimeMillis();
-        while (!GamePanel.gameOver) {
+        while (true) {
             long currentTime = System.nanoTime();
             deltaF += (currentTime - previousTime) / timePerFrame;
             deltaU += (currentTime - previousTime) / timePerUpdate;

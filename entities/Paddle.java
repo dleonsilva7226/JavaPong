@@ -13,6 +13,7 @@ public class Paddle {
     public int playerScore;
     
     
+    
     public Paddle (int playerNum) {
         if (playerNum == 1) {
             this.paddleXDelta = Constants.paddleOneXStart;
@@ -74,13 +75,15 @@ public class Paddle {
     }
     
     public void addPoint() {
-        // playerScore += 10;
-        if (playerScore == 9) {
-            GamePanel.gameOver = true;
-            return;
-        }
         playerScore++;
+        checkIfGameOver();
     }
+
+    public void checkIfGameOver() {
+        if (playerScore == GamePanel.pointsToWin) {
+            GamePanel.gameOver = true;
+        }
+    } 
 
     public void setXDelta(float newVal) {
         this.paddleXDelta = newVal;

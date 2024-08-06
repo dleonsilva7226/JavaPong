@@ -31,6 +31,7 @@ public class GamePanel extends JPanel {
     public static boolean gameStarted = false;
     public static boolean gameOver = false;
     public static boolean restartedGame = false;
+    public static int pointsToWin = 10;
 
     
     public GamePanel () {
@@ -59,11 +60,11 @@ public class GamePanel extends JPanel {
 
     private void gameOver(Graphics g, GameWindow currWindow, JFrame currJFrame) {
         if (GamePanel.gameOver) {
-            if (paddleOne.getPlayerScore() == 10) {
+            if (paddleOne.getPlayerScore() == pointsToWin) {
                 currWindow.setPaddleOneWinTitle();
                 g.drawImage(Screens.P1_WIN_SCREEN, 0, 0, null);
                 return;
-            } else {
+            } else if (paddleTwo.getPlayerScore() == pointsToWin){
                 currWindow.setPaddleTwoWinTitle();
                 g.drawImage(Screens.P2_WIN_SCREEN, 0, 0, null);
             }
@@ -141,7 +142,7 @@ public class GamePanel extends JPanel {
         // paddleTwo.setXDelta(Constants.paddleTwoXStart);
         // paddleTwo.setYDelta(Constants.paddleTwoYStart);
         pongBall.setXDelta(Constants.ballXStart);
-        pongBall.setXDelta(Constants.ballYStart);
+        pongBall.setYDelta(Constants.ballYStart);
         if (playerPoint == 1)
             pongBall.setBallXVel(1);
         else {

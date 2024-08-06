@@ -47,53 +47,60 @@ public class KeyboardInputs implements KeyListener{
         //NOTHING NEEDED HERE FOR NOW
     }
 
+    //Check Over Here if the !GamePanel.gameOver if statement in here is causing a bug
     @Override
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case startKey:
-                if (!GamePanel.gameStarted) {
-                    GamePanel.gameStarted = true;
-                } 
-                break;
-            case pauseKey:
-                if (GamePanel.isPaused) {
-                    GamePanel.isPaused = false;
-                } else {
-                    GamePanel.isPaused = true;
-                }
-                break;
-            case playerOnePaddleUp:
-                this.paddleOneRef.setPaddleYVel(-4);
-                break;
-            case playerOnePaddleDown:
-                this.paddleOneRef.setPaddleYVel(4);   
-                break;
-            case playerTwoPaddleUp:
-                this.paddleTwoRef.setPaddleYVel(-4);
-                break;
-            case playerTwoPaddleDown:
-                
-                this.paddleTwoRef.setPaddleYVel(4);
-                break;
+        if (!GamePanel.gameOver) {
+            switch (e.getKeyCode()) {
+                case startKey:
+                    if (!GamePanel.gameStarted && !GamePanel.gameOver) {
+                        GamePanel.gameStarted = true;
+                    } 
+                    break;
+                case pauseKey:
+                    if (GamePanel.isPaused) {
+                        GamePanel.isPaused = false;
+                    } else {
+                        GamePanel.isPaused = true;
+                    }
+                    break;
+                case playerOnePaddleUp:
+                    this.paddleOneRef.setPaddleYVel(-4);
+                    break;
+                case playerOnePaddleDown:
+                    this.paddleOneRef.setPaddleYVel(4);   
+                    break;
+                case playerTwoPaddleUp:
+                    this.paddleTwoRef.setPaddleYVel(-4);
+                    break;
+                case playerTwoPaddleDown:
+                    
+                    this.paddleTwoRef.setPaddleYVel(4);
+                    break;
+            }
         }
         System.out.println("Key Pressed: " + KeyEvent.getKeyText(e.getKeyCode()));
     }
 
+
+    //Check Over Here if the !GamePanel.gameOver if statement in here is causing a bug
     @Override
     public void keyReleased(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case playerOnePaddleUp:
-                this.paddleOneRef.setPaddleYVel(0);
-                break;
-            case playerOnePaddleDown:
-                this.paddleOneRef.setPaddleYVel(0);
-                break;
-            case playerTwoPaddleUp:
-                this.paddleTwoRef.setPaddleYVel(0);
-                break;
-            case playerTwoPaddleDown:
-                this.paddleTwoRef.setPaddleYVel(0);
-                break;
+        if (!GamePanel.gameOver) {
+            switch (e.getKeyCode()) {
+                case playerOnePaddleUp:
+                    this.paddleOneRef.setPaddleYVel(0);
+                    break;
+                case playerOnePaddleDown:
+                    this.paddleOneRef.setPaddleYVel(0);
+                    break;
+                case playerTwoPaddleUp:
+                    this.paddleTwoRef.setPaddleYVel(0);
+                    break;
+                case playerTwoPaddleDown:
+                    this.paddleTwoRef.setPaddleYVel(0);
+                    break;
+            }
         }
         System.out.println("Key Released: " + KeyEvent.getKeyText(e.getKeyCode()));
     }

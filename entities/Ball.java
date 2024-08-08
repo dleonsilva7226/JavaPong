@@ -32,12 +32,12 @@ public class Ball {
     //Collision Bug: When moving the paddle and the ball goes over the paddle,
     //with the right timing, the ball can still come back and deflect to the
     //screen. Another bug: Ball will sometimes stop when going past paddle.
-    public void changeXDelta (float xVel, boolean isColliding) {
+    public void changeXDelta (float xVel, boolean isCollidingWithPaddle) {
         // if (ballXDelta + xVel >= 0 && ballXDelta + xVel + Constants.ballWidth < GameWindow.screenWidth) {
         //     this.ballXDelta += xVel;
         // } 
         
-        if (isColliding){
+        if (isCollidingWithPaddle){
             if (xVel <= 0) {
                 this.ballXVel = xVels[1];
             } else {
@@ -52,12 +52,12 @@ public class Ball {
 
 
     //Implement YDelta OR Movement Here
-    public void changeYDelta (float yVel, boolean isColliding) {
+    public void changeYDelta (float yVel, boolean isCollidingWithFloor) {
         // if (ballXDelta + xVel >= 0 && ballXDelta + xVel + Constants.ballWidth < GameWindow.screenWidth) {
         //     this.ballXDelta += xVel;
         // } 
         
-        if (isColliding){
+        if (isCollidingWithFloor){
             if (yVel <= 0) {
                 this.ballYVel = yVels[1];
             } else {

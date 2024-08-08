@@ -105,9 +105,9 @@ public class GamePanel extends JPanel {
         paddleTwo.changeYDelta(paddleTwo.getPaddleYVel());
     }
 
-    private void updateBallPos(boolean ballIsCollidingX, boolean ballIsCollidingY) {
-        pongBall.changeXDelta(pongBall.getBallXVel(), ballIsCollidingX);
-        pongBall.changeYDelta(pongBall.getBallYVel(), ballIsCollidingY);
+    private void updateBallPos(boolean ballIsCollidingWithPaddle, boolean ballIsCollidingWithFloor) {
+        pongBall.changeXDelta(pongBall.getBallXVel(), ballIsCollidingWithPaddle);
+        pongBall.changeYDelta(pongBall.getBallYVel(), ballIsCollidingWithFloor);
     }
 
 
@@ -120,9 +120,9 @@ public class GamePanel extends JPanel {
     private void updateGameState(GameWindow currWindow, JFrame currJFrame) {
         if (!GamePanel.isPaused) {
             updatePaddleYPos();
-            boolean ballIsCollidingX = xIsColliding(pongBall, pongBall.getBallXVel(), pongBall.getBallYVel());
-            boolean ballIsCollidingY = yIsColliding(pongBall, pongBall.getBallXVel(), pongBall.getBallYVel());
-            updateBallPos(ballIsCollidingX, ballIsCollidingY);
+            boolean ballIsCollidingWithPaddle = isCollidingWithPaddle(pongBall, pongBall.getBallXVel(), pongBall.getBallYVel());
+            boolean ballIsCollidingWithFloor = isCollidingWithFloor(pongBall, pongBall.getBallXVel(), pongBall.getBallYVel());
+            updateBallPos(ballIsCollidingWithPaddle, ballIsCollidingWithFloor);
             if (pongBall.getXDelta() <= 0) {
                 currWindow.setScore(paddleTwo);
                 restart(2);
@@ -134,12 +134,6 @@ public class GamePanel extends JPanel {
     }
 
     private void restart(int playerPoint) {
-        //Have a function that restarts the game once the player gets a point
-        // GamePanel.restartedGame = true;
-        // paddleOne.setXDelta(Constants.paddleOneXStart);
-        // paddleOne.setYDelta(Constants.paddleOneYStart);
-        // paddleTwo.setXDelta(Constants.paddleTwoXStart);
-        // paddleTwo.setYDelta(Constants.paddleTwoYStart);
         pongBall.setXDelta(Constants.ballXStart);
         pongBall.setYDelta(Constants.ballYStart);
         if (playerPoint == 1)
@@ -147,30 +141,72 @@ public class GamePanel extends JPanel {
         else {
             pongBall.setBallXVel(-1);   
         }
-        // GamePanel.isPaused = true;
     }
 
-    //Collision Detection. MAKE IT BETTER AND MORE ROBUST. FIX THE ERRORS FOR THE Y PART
-    public boolean xIsColliding (Ball pongBall, float xVel, float yVel) {
+    //ERRORS:
+    //COLLISION BUG WITH THE BALL GOING THROUGH PADDLES. LOOK AT ERROR. 
+    //TRY ADDING AND SUBTRACTING BALL HEIGHT TO SEE IF THAT MAKES A DIFFERENCE
+    //USE PRINT STATEMENTS IN COLLISION TO DEBUG.
+    public boolean isCollidingWithPaddle (Ball pongBall, float xVel, float yVel) {
+        //PADDLE ONE COLLISION CHECKS BELOW
+        //Checking if Ball Is Colliding with the Right Side of Paddle One
         if (pongBall.getXDelta() + xVel < paddleOne.getXDelta() + Constants.paddleWidth) {
             if (pongBall.getYDelta() >= paddleOne.getYDelta() && pongBall.getYDelta() <= paddleOne.getYDelta() + Constants.paddleHeight) {
                 return true;
             }
-            
-        } else if (pongBall.getXDelta() + xVel > paddleTwo.getXDelta()) {
+        }
+        //Checking if Ball Is Colliding with the Left Side of Paddle One
+        else if (pongBall.getXDelta() + xVel > paddleOne.getXDelta() && pongBall.getXDelta() + xVel < paddleOne.getXDelta() + Constants.paddleWidth) {
+            if (pongBall.getYDelta() >= paddleOne.getYDelta() && pongBall.getYDelta() <= paddleOne.getYDelta() + Constants.paddleHeight) {
+                return true;
+            }
+        }
+        //Checking if Ball is Colliding with the Top Side of Paddle One
+        else if (pongBall.getXDelta() + xVel >= paddleOne.getXDelta() && pongBall.getXDelta() + xVel <= paddleOne.getXDelta() + Constants.paddleWidth) {
+            if (pongBall.getYDelta() + yVel + pongBall.getHeight() >= paddleOne.getYDelta()) {
+                return true;
+            }
+        }
+        //Checking if Ball is Colliding with the Bottom Side of Paddle One
+        else if (pongBall.getXDelta() + xVel >= paddleOne.getXDelta() && pongBall.getXDelta() + xVel <= paddleOne.getXDelta() + Constants.paddleWidth) {
+            if (pongBall.getYDelta() - pongBall.getHeight() + yVel <= paddleOne.getYDelta() + Constants.paddleHeight) {
+                return true;
+            }
+        }
+
+
+        //PADDLE TWO COLLISION CHECKS BELOW
+        //Checking if Ball is Colliding with the Left Side of Paddle Two
+        if (pongBall.getXDelta() + xVel > paddleTwo.getXDelta()) {
             if (pongBall.getYDelta() >= paddleTwo.getYDelta() && pongBall.getYDelta() <= paddleTwo.getYDelta() + Constants.paddleHeight) {
                 return true;
             }  
-        } 
-        // else if (pongBall.getYDelta() - pongBall.getHeight() <= 0) {
-        //     return true;
-        // } else if (pongBall.getYDelta() + pongBall.getHeight() >= GameWindow.screenHeight) {
-        //     return true;
-        // }
+        }
+        //Checking if Ball is Colliding with the Right Side of Paddle Two 
+        else if (pongBall.getXDelta() + xVel < paddleTwo.getXDelta() + Constants.paddleWidth && pongBall.getXDelta() + xVel > paddleTwo.getXDelta()) {
+            if (pongBall.getYDelta() >= paddleTwo.getYDelta() && pongBall.getYDelta() <= paddleTwo.getYDelta() + Constants.paddleHeight) {
+                return true;
+            }  
+        }
+        //Checking if Ball is Colliding with the Top Side of Paddle Two
+        else if (pongBall.getXDelta() + xVel >= paddleTwo.getXDelta() && pongBall.getXDelta() + xVel <= pongBall.getXDelta() + Constants.paddleWidth) {
+            if (pongBall.getYDelta() + yVel + pongBall.getHeight() >= paddleTwo.getYDelta()) {
+                return true;
+            }
+        }
+        //Checking if Ball is Colliding with the Bottom Side of Paddle Two
+        else if (pongBall.getXDelta() + xVel >= paddleTwo.getXDelta() && pongBall.getXDelta() + xVel <= pongBall.getXDelta() + Constants.paddleWidth) {
+            if (pongBall.getYDelta() + yVel - pongBall.getHeight() <= paddleTwo.getYDelta() + Constants.paddleHeight) {
+                return true;
+            }
+        }
+
         return false;
     }
 
-    public boolean yIsColliding (Ball pongBall, float xVel, float yVel) {
+
+    //Have Paddle Collision Here Also
+    public boolean isCollidingWithFloor (Ball pongBall, float xVel, float yVel) {
         if (pongBall.getYDelta() - pongBall.getHeight() <= 0) {
             return true;
         } else if (pongBall.getYDelta() + pongBall.getHeight() >= GameWindow.screenHeight) {
@@ -178,8 +214,4 @@ public class GamePanel extends JPanel {
         }
         return false;
     }
-
-
-
-
 }

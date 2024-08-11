@@ -35,6 +35,8 @@ public class KeyboardInputs implements KeyListener{
     //START, PAUSE, END BUTTONS
     protected final static int pauseKey = KeyEvent.VK_P;
     protected final static int startKey = KeyEvent.VK_SPACE;
+    public static boolean pressedStartKeyTwice = false;
+    public static int startKeyPressingCt = 0;
 
     public KeyboardInputs (GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -53,9 +55,11 @@ public class KeyboardInputs implements KeyListener{
         if (!GamePanel.gameOver) {
             switch (e.getKeyCode()) {
                 case startKey:
-                    if (!GamePanel.gameStarted && !GamePanel.gameOver) {
+                    if (!GamePanel.gameStarted && !GamePanel.gameOver && KeyboardInputs.startKeyPressingCt >= 1) {
                         GamePanel.gameStarted = true;
-                    } 
+                    } else {
+                        KeyboardInputs.startKeyPressingCt++;
+                    }
                     break;
                 case pauseKey:
                     if (GamePanel.isPaused) {

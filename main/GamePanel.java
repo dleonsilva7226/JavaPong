@@ -72,9 +72,11 @@ public class GamePanel extends JPanel {
     }
 
     public void gameNotStarted(Graphics g, GameWindow currWindow, JFrame currJFrame) {
-        if (!GamePanel.gameStarted) {
-            // currWindow.setTitle();
+        if (!GamePanel.gameStarted && KeyboardInputs.startKeyPressingCt == 0) {
             g.drawImage(Screens.START_SCREEN, 0, 0, null);    
+        } else if (!GamePanel.gameStarted && KeyboardInputs.startKeyPressingCt == 1) {
+            currWindow.setInstructionsTitle();
+            g.drawImage(Screens.INSTRUCTIONS_SCREEN, 0, 0, null);
         }
 
     }

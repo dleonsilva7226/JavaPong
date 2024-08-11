@@ -112,15 +112,4 @@ public class Ball {
     public void setYDelta(float newVal) {
         this.ballYDelta = newVal;
     }
-
-
-    // public void updateXVel(boolean isColliding) {
-    //     if (isColliding) {
-    //         if (this.ballXVel < 0) {
-    //             this.ballXVel = xVels[1];
-    //         } else {
-    //             this.ballXVel = xVels[0];
-    //         }
-    //     }
-    // }
 }

@@ -7,7 +7,6 @@ import main.GameWindow;
 public class Constants {
 
     //----------TITLE VARIABLES----------\\
-    //Currently Playing Title
 
     //Paused Title
     public final static String PAUSE_TITLE = "Game is Paused!";

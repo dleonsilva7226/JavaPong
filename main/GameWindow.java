@@ -45,7 +45,7 @@ public class GameWindow {
     }
 
     public void setPlayingTitle(int pOneScore, int pTwoScore) {
-        jFrame.setTitle("P1 Score: " + pOneScore + "                    P2 Score: " + pTwoScore);
+        jFrame.setTitle("P1 Score: " + pOneScore + "                                                                                                                " + " P2 Score: " + pTwoScore);
     }
 
     public void setScore(Paddle player) {
@@ -63,10 +63,6 @@ public class GameWindow {
     public JFrame getJFrame() {
         return this.jFrame;
     }
-
-    // public String getPlayingTitle() {
-    //     return Constants.playingTitle;
-    // }
     
     public String getPauseTitle() {
         return Constants.PAUSE_TITLE;
@@ -84,12 +80,7 @@ public class GameWindow {
         jFrame.setTitle("Player 2 Wins!");
     }
 
-    // public int getPlayerOneScore() {
-    //     return playerOneScore;
-    // }
-    
-    // public int getPlayerTwoScore() {
-    //     return playerTwoScore;
-    // }
-
+    public void setInstructionsTitle() {
+        jFrame.setTitle("Instructions");
+    }
 }
